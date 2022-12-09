@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Все имеющиеся посты
+{% endblock %}
+
+{% block body %}
+<h1>Все имеющиеся посты</h1>
+<hr>
+    {% for item in data %}
+        <div>
+            <a href="/search/{{item.poster_name}}" class="item__head">
+            <div class="item__ava-wrap">
+              <img src="{{item.poster_avatar}}" alt="Аватар" class="item__ava" width="47">
+            </div>
+            <span class="item__username">{{item.poster_name}}</span>
+          </a>
+            <a href="/bookmarks/add/{{item.pk}}" title="Добавить в закладки">
+                <button type="button" class="item__bookmark-btn">
+                    <img src="static/img/bookmark.png" alt="" class="item__bookmark-icon" width="24">
+                </button>
+            </a>
+        </div>
+                <a href="/post/{{item.pk}}">
+                <img src="{{item.pic}}" width="348" class="item__post-img" alt="Картинка поста">
+                </a>
+                <p>
+                {{item.short_content|safe}}
+                </p>
+            <div class="item__post-info">
+            <p class="item__comments-counter">{{item.comment_count}} комментария</p>
+            <div class="item__counter">
+              <img src="static/img/eye.png" alt="" class="item__counter-icon" width="26">
+              <span class="item__counter-text">{{item.views_count}}</span>
+            </div>
+          </div>
+
+        </div>
+        <hr>
+    {% endfor %}
+{% endblock %}
